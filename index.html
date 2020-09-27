@@ -13077,48 +13077,31 @@ div#notebook {
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<<<<<<< HEAD
-<p><a href="https://srprinz.github.io/CMPS3610/">https://srprinz.github.io/CMPS3610/</a>
-<a href="https://github.com/srprinz/CMPS3610">https://github.com/srprinz/CMPS3610</a></p>
-=======
 <p><a href="https://srprinz.github.io/CMPS3610/">https://srprinz.github.io/CMPS3610/</a></p>
 <p><a href="https://github.com/srprinz/CMPS3610">https://github.com/srprinz/CMPS3610</a></p>
->>>>>>> 0f4bf642d7a6668819f238b7c7dc66701db83918
 
 </div>
 </div>
 </div>
-<<<<<<< HEAD
-=======
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>This dataset reflects incidents that have been reported to the New Orleans Police Department in 2019. Data is provided by Orleans Parish Communication District (OPCD), the administrative office of 9-1-1 for the City of New Orleans.</p>
+
+</div>
+</div>
+</div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">In&nbsp;[1]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
-<span class="n">Calls2019_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;../Calls_for_Service_2019.csv&quot;</span><span class="p">)</span>
+<span class="c1">#set &#39;Beat&#39; column dtype to object to avoid mixed dtypes in column</span>
+<span class="n">Calls2019_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;../Calls_for_Service_2019.csv&quot;</span><span class="p">,</span><span class="n">low_memory</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 </pre></div>
 
     </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stderr output_text">
-<pre>/opt/conda/lib/python3.8/site-packages/IPython/core/interactiveshell.py:3145: DtypeWarning: Columns (18) have mixed types.Specify dtype option on import or set low_memory=False.
-  has_raised = await self.run_ast_nodes(code_ast.body, cell_name,
-</pre>
-</div>
-</div>
-
 </div>
 </div>
 
@@ -13128,7 +13111,33 @@ div#notebook {
 <div class="prompt input_prompt">In&nbsp;[2]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">Calls2019_df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#Tidy data by dropping columns that won&#39;t be used (NOPD_Item, MapX, MapY, TimeClosed, Beat, Location)</span>
+<span class="k">del</span> <span class="n">Calls2019_df</span><span class="p">[</span><span class="s1">&#39;NOPD_Item&#39;</span><span class="p">]</span>
+<span class="k">del</span> <span class="n">Calls2019_df</span><span class="p">[</span><span class="s1">&#39;MapX&#39;</span><span class="p">]</span>
+<span class="k">del</span> <span class="n">Calls2019_df</span><span class="p">[</span><span class="s1">&#39;MapY&#39;</span><span class="p">]</span>
+<span class="k">del</span> <span class="n">Calls2019_df</span><span class="p">[</span><span class="s1">&#39;TimeClosed&#39;</span><span class="p">]</span>
+<span class="k">del</span> <span class="n">Calls2019_df</span><span class="p">[</span><span class="s1">&#39;Beat&#39;</span><span class="p">]</span>
+<span class="k">del</span> <span class="n">Calls2019_df</span><span class="p">[</span><span class="s1">&#39;Location&#39;</span><span class="p">]</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[4]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#Calls2019_df.dtypes</span>
+<span class="c1">#Convert TimeCreate, TimeDispatch, and TimeArrival to datetime</span>
+<span class="n">Calls2019_df</span><span class="p">[</span><span class="s1">&#39;TimeCreate&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">Calls2019_df</span><span class="p">[</span><span class="s1">&#39;TimeCreate&#39;</span><span class="p">],</span><span class="n">infer_datetime_format</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">Calls2019_df</span><span class="p">[</span><span class="s1">&#39;TimeDispatch&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">Calls2019_df</span><span class="p">[</span><span class="s1">&#39;TimeDispatch&#39;</span><span class="p">],</span><span class="n">infer_datetime_format</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">Calls2019_df</span><span class="p">[</span><span class="s1">&#39;TimeArrival&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">Calls2019_df</span><span class="p">[</span><span class="s1">&#39;TimeArrival&#39;</span><span class="p">],</span><span class="n">infer_datetime_format</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="c1">#replace missing data</span>
+<span class="n">Calls2019_df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
 </pre></div>
 
     </div>
@@ -13141,7 +13150,7 @@ div#notebook {
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[2]:</div>
+    <div class="prompt output_prompt">Out[4]:</div>
 
 
 
@@ -13164,153 +13173,116 @@ div#notebook {
   <thead>
     <tr style="text-align: right;">
       <th></th>
-      <th>NOPD_Item</th>
       <th>Type</th>
       <th>TypeText</th>
       <th>Priority</th>
-      <th>MapX</th>
-      <th>MapY</th>
       <th>TimeCreate</th>
       <th>TimeDispatch</th>
       <th>TimeArrival</th>
-      <th>TimeClosed</th>
-      <th>...</th>
+      <th>Disposition</th>
       <th>DispositionText</th>
       <th>InitialType</th>
       <th>InitialTypeText</th>
       <th>InitialPriority</th>
       <th>SelfInitiated</th>
-      <th>Beat</th>
       <th>BLOCK_ADDRESS</th>
       <th>Zip</th>
       <th>PoliceDistrict</th>
-      <th>Location</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <th>0</th>
-      <td>C3778719</td>
       <td>58</td>
       <td>RETURN FOR ADDITIONAL INFO</td>
       <td>1I</td>
-      <td>3677708</td>
-      <td>534774</td>
-      <td>03/28/2019 01:11:19 PM</td>
-      <td>03/28/2019 01:11:19 PM</td>
-      <td>NaN</td>
-      <td>03/28/2019 02:43:18 PM</td>
-      <td>...</td>
+      <td>2019-03-28 13:11:19</td>
+      <td>2019-03-28 13:11:19</td>
+      <td>NaT</td>
+      <td>NAT</td>
       <td>Necessary Action Taken</td>
       <td>58</td>
       <td>RETURN FOR ADDITIONAL INFO</td>
       <td>1I</td>
       <td>N</td>
-      <td>1I02</td>
       <td>N Galvez St &amp; Conti St</td>
       <td>70119</td>
       <td>1</td>
-      <td>(29.96455831, -90.07992969)</td>
     </tr>
     <tr>
       <th>1</th>
-      <td>C3806319</td>
       <td>62L</td>
       <td>BURGLAR ALARM, LOCAL</td>
       <td>2D</td>
-      <td>3677273</td>
-      <td>533375</td>
-      <td>03/28/2019 05:02:07 PM</td>
-      <td>03/28/2019 05:05:16 PM</td>
-      <td>NaN</td>
-      <td>03/28/2019 05:13:47 PM</td>
-      <td>...</td>
+      <td>2019-03-28 17:02:07</td>
+      <td>2019-03-28 17:05:16</td>
+      <td>NaT</td>
+      <td>NAT</td>
       <td>Necessary Action Taken</td>
       <td>62L</td>
       <td>BURGLAR ALARM, LOCAL</td>
       <td>2D</td>
       <td>N</td>
-      <td>1H01</td>
       <td>020XX Canal St</td>
       <td>70112</td>
       <td>1</td>
-      <td>(29.9607251, -90.08135199)</td>
     </tr>
     <tr>
       <th>2</th>
-      <td>C1089219</td>
       <td>22A</td>
       <td>AREA CHECK</td>
       <td>1K</td>
-      <td>3667179</td>
-      <td>554833</td>
-      <td>03/08/2019 03:50:25 PM</td>
-      <td>03/08/2019 03:50:25 PM</td>
-      <td>03/08/2019 03:50:30 PM</td>
-      <td>03/08/2019 04:20:03 PM</td>
-      <td>...</td>
+      <td>2019-03-08 15:50:25</td>
+      <td>2019-03-08 15:50:25</td>
+      <td>2019-03-08 15:50:30</td>
+      <td>NAT</td>
       <td>Necessary Action Taken</td>
       <td>22A</td>
       <td>AREA CHECK</td>
       <td>1K</td>
       <td>N</td>
-      <td>3F02</td>
       <td>Catina St &amp; Robert E Lee Blvd</td>
       <td>70124</td>
       <td>3</td>
-      <td>(30.02002615, -90.1125062)</td>
     </tr>
     <tr>
       <th>3</th>
-      <td>C3820419</td>
       <td>21</td>
       <td>COMPLAINT OTHER</td>
       <td>1J</td>
-      <td>3675994</td>
-      <td>534935</td>
-      <td>03/28/2019 06:52:04 PM</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>03/28/2019 06:58:18 PM</td>
-      <td>...</td>
+      <td>2019-03-28 18:52:04</td>
+      <td>NaT</td>
+      <td>NaT</td>
+      <td>VOI</td>
       <td>VOID</td>
       <td>63</td>
       <td>PROWLER</td>
       <td>2E</td>
       <td>N</td>
-      <td>1I03</td>
       <td>001XX N Dorgenois St</td>
       <td>70119</td>
       <td>1</td>
-      <td>(29.96505415, -90.08533671)</td>
     </tr>
     <tr>
       <th>4</th>
-      <td>C3797319</td>
       <td>62C</td>
       <td>SIMPLE BURGLARY VEHICLE</td>
       <td>1G</td>
-      <td>3679540</td>
-      <td>519877</td>
-      <td>03/28/2019 03:54:27 PM</td>
-      <td>03/28/2019 04:18:37 PM</td>
-      <td>NaN</td>
-      <td>03/28/2019 10:47:44 PM</td>
-      <td>...</td>
+      <td>2019-03-28 15:54:27</td>
+      <td>2019-03-28 16:18:37</td>
+      <td>NaT</td>
+      <td>RTF</td>
       <td>REPORT TO FOLLOW</td>
       <td>62C</td>
       <td>SIMPLE BURGLARY VEHICLE</td>
       <td>1G</td>
       <td>N</td>
-      <td>6A02</td>
       <td>005XX Soraparu St</td>
       <td>70130</td>
       <td>6</td>
-      <td>(29.92354229, -90.07466234)</td>
     </tr>
   </tbody>
 </table>
-<p>5 rows × 21 columns</p>
 </div>
 </div>
 
@@ -13319,10 +13291,18 @@ div#notebook {
 </div>
 </div>
 
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>This dataset reflects incidents that have been reported to the New Orleans Police Department in 2020. Data is provided by Orleans Parish Communication District (OPCD), the administrative office of 9-1-1 for the City of New Orleans.</p>
+
+</div>
+</div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[4]:</div>
+<div class="prompt input_prompt">In&nbsp;[6]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">Calls2020_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;../Call_for_Service_2020.csv&quot;</span><span class="p">)</span>
@@ -13335,10 +13315,36 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[6]:</div>
+<div class="prompt input_prompt">In&nbsp;[7]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">Calls2020_df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#Tidy data by dropping columns that won&#39;t be used (NOPD_Item, MapX, MapY, TimeClosed, Beat, Location)</span>
+<span class="k">del</span> <span class="n">Calls2020_df</span><span class="p">[</span><span class="s1">&#39;NOPD_Item&#39;</span><span class="p">]</span>
+<span class="k">del</span> <span class="n">Calls2020_df</span><span class="p">[</span><span class="s1">&#39;MapX&#39;</span><span class="p">]</span>
+<span class="k">del</span> <span class="n">Calls2020_df</span><span class="p">[</span><span class="s1">&#39;MapY&#39;</span><span class="p">]</span>
+<span class="k">del</span> <span class="n">Calls2020_df</span><span class="p">[</span><span class="s1">&#39;TimeClosed&#39;</span><span class="p">]</span>
+<span class="k">del</span> <span class="n">Calls2020_df</span><span class="p">[</span><span class="s1">&#39;Beat&#39;</span><span class="p">]</span>
+<span class="k">del</span> <span class="n">Calls2020_df</span><span class="p">[</span><span class="s1">&#39;Location&#39;</span><span class="p">]</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[10]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#Calls2019_df.dtypes</span>
+<span class="c1">#Convert TimeCreate, TimeDispatch, and TimeArrive to datetime</span>
+<span class="n">Calls2020_df</span><span class="p">[</span><span class="s1">&#39;TimeCreate&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">Calls2020_df</span><span class="p">[</span><span class="s1">&#39;TimeCreate&#39;</span><span class="p">],</span><span class="n">infer_datetime_format</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">Calls2020_df</span><span class="p">[</span><span class="s1">&#39;TimeDispatch&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">Calls2020_df</span><span class="p">[</span><span class="s1">&#39;TimeDispatch&#39;</span><span class="p">],</span><span class="n">infer_datetime_format</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">Calls2020_df</span><span class="p">[</span><span class="s1">&#39;TimeArrive&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">Calls2020_df</span><span class="p">[</span><span class="s1">&#39;TimeArrive&#39;</span><span class="p">],</span><span class="n">infer_datetime_format</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="c1">#replace missing data</span>
+<span class="n">Calls2020_df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
 </pre></div>
 
     </div>
@@ -13351,7 +13357,7 @@ div#notebook {
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[6]:</div>
+    <div class="prompt output_prompt">Out[10]:</div>
 
 
 
@@ -13374,153 +13380,116 @@ div#notebook {
   <thead>
     <tr style="text-align: right;">
       <th></th>
-      <th>NOPD_Item</th>
       <th>Type</th>
       <th>TypeText</th>
       <th>Priority</th>
       <th>InitialType</th>
       <th>InitialTypeText</th>
       <th>InitialPriority</th>
-      <th>MapX</th>
-      <th>MapY</th>
       <th>TimeCreate</th>
-      <th>...</th>
+      <th>TimeDispatch</th>
       <th>TimeArrive</th>
-      <th>TimeClosed</th>
       <th>Disposition</th>
       <th>DispositionText</th>
       <th>SelfInitiated</th>
-      <th>Beat</th>
       <th>BLOCK_ADDRESS</th>
       <th>Zip</th>
       <th>PoliceDistrict</th>
-      <th>Location</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <th>0</th>
-      <td>A0000120</td>
       <td>94F</td>
       <td>FIREWORKS</td>
       <td>1A</td>
       <td>103</td>
       <td>DISTURBANCE (OTHER)</td>
       <td>1C</td>
-      <td>3677228</td>
-      <td>550814</td>
-      <td>01/01/2020 12:00:34 AM</td>
-      <td>...</td>
-      <td>NaN</td>
-      <td>01/01/2020 06:53:08 AM</td>
+      <td>2020-01-01 00:00:34</td>
+      <td>2020-01-01 02:34:18</td>
+      <td>NaT</td>
       <td>NAT</td>
       <td>Necessary Action Taken</td>
       <td>N</td>
-      <td>3N01</td>
       <td>001XX Blk Riviera Ave</td>
       <td>70122</td>
       <td>3</td>
-      <td>POINT (-90.0808922 30.0086791)</td>
     </tr>
     <tr>
       <th>1</th>
-      <td>A0000220</td>
       <td>21</td>
       <td>COMPLAINT OTHER</td>
       <td>1J</td>
       <td>21</td>
       <td>COMPLAINT OTHER</td>
       <td>1J</td>
-      <td>3668710</td>
-      <td>533007</td>
-      <td>01/01/2020 12:00:42 AM</td>
-      <td>...</td>
-      <td>01/01/2020 12:00:42 AM</td>
-      <td>01/01/2020 01:37:16 AM</td>
+      <td>2020-01-01 00:00:42</td>
+      <td>2020-01-01 00:00:42</td>
+      <td>2020-01-01 00:00:42</td>
       <td>NAT</td>
       <td>Necessary Action Taken</td>
       <td>Y</td>
-      <td>2U04</td>
       <td>034XX Broadway St</td>
       <td>70125</td>
       <td>2</td>
-      <td>POINT (-90.10840522 29.95996774)</td>
     </tr>
     <tr>
       <th>2</th>
-      <td>A0000320</td>
       <td>94F</td>
       <td>FIREWORKS</td>
       <td>1A</td>
       <td>94F</td>
       <td>FIREWORKS</td>
       <td>2J</td>
-      <td>3674930</td>
-      <td>533982</td>
-      <td>01/01/2020 12:01:05 AM</td>
-      <td>...</td>
-      <td>01/01/2020 02:08:17 AM</td>
-      <td>01/01/2020 02:34:36 AM</td>
+      <td>2020-01-01 00:01:05</td>
+      <td>2020-01-01 01:49:42</td>
+      <td>2020-01-01 02:08:17</td>
       <td>NAT</td>
       <td>Necessary Action Taken</td>
       <td>N</td>
-      <td>1H02</td>
       <td>026XX Banks St</td>
       <td>70119</td>
       <td>1</td>
-      <td>POINT (-90.08872937 29.96246347)</td>
     </tr>
     <tr>
       <th>3</th>
-      <td>A0000420</td>
       <td>94</td>
       <td>DISCHARGING FIREARM</td>
       <td>2D</td>
       <td>94</td>
       <td>DISCHARGING FIREARM</td>
       <td>2D</td>
-      <td>3681805</td>
-      <td>536653</td>
-      <td>01/01/2020 12:02:50 AM</td>
-      <td>...</td>
-      <td>01/01/2020 12:09:13 AM</td>
-      <td>01/01/2020 12:13:45 AM</td>
+      <td>2020-01-01 00:02:50</td>
+      <td>2020-01-01 00:02:54</td>
+      <td>2020-01-01 00:09:13</td>
       <td>GOA</td>
       <td>GONE ON ARRIVAL</td>
       <td>N</td>
-      <td>1A01</td>
       <td>Kerlerec St &amp; N Robertson St</td>
       <td>70116</td>
       <td>1</td>
-      <td>POINT (-90.0669267 29.96960271)</td>
     </tr>
     <tr>
       <th>4</th>
-      <td>A0000520</td>
       <td>94F</td>
       <td>FIREWORKS</td>
       <td>1A</td>
       <td>94F</td>
       <td>FIREWORKS</td>
       <td>2J</td>
-      <td>3668697</td>
-      <td>542174</td>
-      <td>01/01/2020 12:03:46 AM</td>
-      <td>...</td>
-      <td>NaN</td>
-      <td>01/01/2020 12:42:13 AM</td>
+      <td>2020-01-01 00:03:46</td>
+      <td>2020-01-01 00:34:36</td>
+      <td>NaT</td>
       <td>NAT</td>
       <td>Necessary Action Taken</td>
       <td>N</td>
-      <td>3I01</td>
       <td>053XX Memphis St</td>
       <td>70124</td>
       <td>3</td>
-      <td>POINT (-90.10813674 29.98517428)</td>
     </tr>
   </tbody>
 </table>
-<p>5 rows × 21 columns</p>
 </div>
 </div>
 
@@ -13529,6 +13498,14 @@ div#notebook {
 </div>
 </div>
 
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>A challenge I came across when transforming the data was converting from string to datetime.  Due to how large this dataset is, it was taking over 10 minutes to complete the conversion.  This is because pandas uses dateutil.parser.parse for parsing the strings when it has a non-default format or when no format string is supplied. I was able to speed up the process a bit by adding the parameter "infer_datetime_format=True".</p>
+
+</div>
+</div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
@@ -13543,7 +13520,6 @@ div#notebook {
 </div>
 
 </div>
->>>>>>> 0f4bf642d7a6668819f238b7c7dc66701db83918
     </div>
   </div>
 </body>
